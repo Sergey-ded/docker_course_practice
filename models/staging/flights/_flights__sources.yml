@@ -1,0 +1,47 @@
+sources:
+  - name: demo_src 
+    description: Данные из БД авиаперелетов # Описание источника
+    # database: dwh_flights # если указано в profiles, можно не прописывать
+    # schema: demo_src # если совпадает с названием источника (не понял что это), можно не писать
+    tables:
+      - name: aircrafts
+        description: Модели самолетов # Описание источника
+        columns:
+          - name: aircraft_code
+            description: Код модели самолета
+          - name: model
+            description: Название модели самолета
+          - name: range
+            description: Неизвестно
+      - name: airports
+        description: Аэропорты
+        columns:
+          - name: airport_code
+            description: Код аэропорта
+          - name: airport_name
+            description: Название аэропорта
+          - name: city
+            description: Город
+          - name: coordinates
+            description: Координаты
+          - name: timezone
+            description: Временная зона
+      - name: seats
+        description: Места в самолетах
+        columns:
+          - name: aircraft_code
+            description: Код самолета
+          - name: seat_no
+            description: Номер сидения
+          - name: fare_conditions
+            description: Тип тарифа (эконом, бизнес)
+      - name: bookings
+        columns:
+          - name: book_ref
+          - name: book_date
+          - name: total_amount
+        freshness:
+          warn_after: {count: 600000, period: hour} # Можно убрать как warn так и error
+          error_after: {count: 10000, period: day}
+          filter: current_timestamp::date - book_date::date < 30000
+        loaded_at_field: book_date::timestamp
