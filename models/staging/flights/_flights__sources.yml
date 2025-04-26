@@ -8,7 +8,7 @@ sources:
         description: Модели самолетов # Описание источника
         columns:
           - name: aircraft_code
-            description: Код модели самолета
+            description: Код модели самолета # Описание колонки
           - name: model
             description: Название модели самолета
           - name: range
@@ -45,3 +45,38 @@ sources:
           error_after: {count: 10000, period: day}
           filter: current_timestamp::date - book_date::date < 30000
         loaded_at_field: book_date::timestamp
+      - name: boarding_passes
+        columns:
+          - name: ticket_no
+          - name: flight_id
+          - name: boarding_no
+          - name: seat_no
+      - name: flights
+        columns:
+          - name: flight_id
+          - name: flight_no
+          - name: scheduled_departure
+          - name: scheduled_arrival
+          - name: departure_airport
+          - name: arrival_airport
+          - name: status
+          - name: aircraft_code
+          - name: actual_departure
+          - name: actual_arrival
+      - name: ticket_flights
+        columns:
+        - name: ticket_no
+        - name: flight_id
+        - name: fare_conditions
+        - name: amount
+      - name: tickets
+        columns:
+          - name: ticket_no
+          - name: book_ref
+          - name: passenger_id
+          - name: passenger_name
+          - name: contact_data
+
+
+
+          
