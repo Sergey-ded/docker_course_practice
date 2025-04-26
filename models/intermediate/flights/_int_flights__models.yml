@@ -1,0 +1,34 @@
+models:
+  - name: fct_bookings
+    description: Факты бронирований
+    docs:
+      show: true # Будет ли эта модель показываться в документации (по умолчанию - true)
+      node_color: red
+    latest_version: 1 # какая версия данной модели последняя (будет использовать по умолчанию)
+    versions:
+      - v: 1
+    config:
+      contract: {enforced: true}
+    meta: # мета информаци (что угодно)
+      owner: "sergejgrigorev29@gmail.com"
+      contact_tg: bio_ded
+      starus: in_dev
+    columns:
+      - name: book_ref
+        data_type: varchar(8)
+        constraints:
+          - type: not_null
+      - name: book_date
+        data_type: timestamptz
+      - name: total_amount
+        data_type: numeric(10, 2)
+        constraints:
+        - type: check
+          expression: "total_amount > 0"
+        tests:
+          - not_null
+        meta:
+          owner: finance_team
+        quote: false # нужно ли название колонки обрамлять кавычками в логах (мб еще где-то) (если поле имеет какие-то спец симолы или пробел, спец слова)
+                
+    
