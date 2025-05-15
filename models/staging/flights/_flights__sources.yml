@@ -1,8 +1,8 @@
 sources:
-  - name: demo_src 
+  - name: demo_src
     description: Данные из БД авиаперелетов # Описание источника
     # database: dwh_flights # если указано в profiles, можно не прописывать
-    # schema: demo_src # если совпадает с названием источника (не понял что это), можно не писать
+    # schema: demo_src # если совпадает с названием источника, можно не писать
     tables:
       - name: aircrafts
         description: Модели самолетов # Описание источника
