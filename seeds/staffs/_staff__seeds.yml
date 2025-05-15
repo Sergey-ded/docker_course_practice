@@ -1,0 +1,12 @@
+seeds:
+  - name: staff_id
+    description: Id сотрудников компании
+    config:
+      column_types:
+        id: bigint
+      delimiter: ";"
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique

@@ -4,10 +4,12 @@
     )
 }}
 select
-    ticket_no,
-    book_ref,
-    passenger_id,
-    passenger_name,
-    contact_data
+    model.ticket_no,
+    model.book_ref,
+    REPLACE(model.passenger_id, ' ', '')::bigint as passenger_id,
+    model.passenger_name,
+    model.contact_data
 from
-    {{ ref('stg_flights_tickets') }}
+    {{ ref('stg_flights_tickets') }} model
+where
+  REPLACE(model.passenger_id, ' ', '')::bigint not in (select id from {{ ref('staff_id') }})
